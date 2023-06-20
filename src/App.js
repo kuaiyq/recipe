@@ -2,13 +2,11 @@ import Axios from "axios";
 import { useState } from "react";
 import "./app.css";
 import RecipeTile from "./components/recipe-tile";
-
+import { v4 as uuidv4 } from "uuid";
+import { YOUR_APP_ID, YOUR_APP_KEY } from "./key";
 function App() {
-  const [query, setquery] = useState("");
+  const [query, setquery] = useState("rice");
   const [recipes, setrecipes] = useState([]);
-
-  const YOUR_APP_ID = `82e453da`;
-  const YOUR_APP_KEY = "3bb5d1a3b992f408b9003effd74c9c22";
 
   const url = `https://api.edamam.com/search?q=${query}&app_id=${YOUR_APP_ID}&app_key=${YOUR_APP_KEY}`;
 
@@ -41,7 +39,7 @@ function App() {
       <div className="app__recipes">
         {recipes !== [] &&
           recipes.map((recipe) => {
-            return <RecipeTile recipe={recipe} />;
+            return <RecipeTile key={uuidv4()} recipe={recipe} />;
           })}
       </div>
     </div>
